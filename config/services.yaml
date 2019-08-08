@@ -25,3 +25,14 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    App\MessageHandler\Command\:
+        resource: '%kernel.project_dir%/src/MessageHandler/Command/*CommandHandler.php'
+        autoconfigure: false
+        tags:
+             - { name: messenger.message_handler, bus: command.bus }
+
+    App\MessageHandler\Query\:
+        resource: '%kernel.project_dir%/src/MessageHandler/Query/*QueryHandler.php'
+        autoconfigure: false
+        tags:
+             - { name: messenger.message_handler, bus: query.bus }
